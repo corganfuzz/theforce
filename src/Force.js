@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Graph } from "react-d3-graph";
 
-const data =
-{
-  "links": [
+const data = {
+  "links":
+  [
       {
           "source": "255",
           "target": "245"
@@ -165,84 +165,135 @@ const data =
           "target": "286"
       }
   ],
-"nodes": [
+nodes:
+[
     {
-        "id": "244"
+        "label": "Kontron",
+        "id": "244",
+        "type": "device"
     },
     {
-        "id": "245"
+        "label": "RWS01426829",
+        "id": "245",
+        "type": "device_instance"
     },
     {
-        "id": "263"
+        "label": "test",
+        "id": "263",
+        "type": "device_instance"
     },
     {
-        "id": "265"
+        "label": "MWKS410510",
+        "id": "265",
+        "type": "device_instance"
     },
     {
-        "id": "267"
+        "label": "RWS01534531",
+        "id": "267",
+        "type": "device_instance"
     },
     {
-        "id": "248"
+        "label": "hal/insiteagent:1",
+        "id": "248",
+        "type": "application"
     },
     {
-        "id": "249"
+        "label": "DB Connector",
+        "id": "249",
+        "type": "application"
     },
     {
-        "id": "250"
+        "label": "hal/rtsapi:1",
+        "id": "250",
+        "type": "application"
     },
     {
-        "id": "255"
+        "label": "hal/rmq:1",
+        "id": "255",
+        "type": "application"
     },
     {
-        "id": "256"
+        "label": "AMQP",
+        "id": "256",
+        "type": "application"
     },
     {
-        "id": "257"
+        "label": "Event Hub",
+        "id": "257",
+        "type": "application"
     },
     {
-        "id": "260"
+        "label": "hal/rtsapi:2",
+        "id": "260",
+        "type": "application"
     },
     {
-        "id": "261"
+        "label": "hal/rtsapi:3",
+        "id": "261",
+        "type": "application"
     },
     {
-        "id": "269"
+        "label": "mongo:3-windowsservercore",
+        "id": "269",
+        "type": "application"
     },
     {
-        "id": "282"
+        "label": "IIS Server",
+        "id": "282",
+        "type": "application"
     },
     {
-        "id": "285"
+        "label": "hal/wai:2",
+        "id": "285",
+        "type": "application"
     },
     {
-        "id": "286"
+        "label": "hal/wai:1",
+        "id": "286",
+        "type": "application"
     },
     {
-        "id": "287"
+        "label": "10.133.1.101/hal/rabbitmq:1, hal/rabbitmq:1",
+        "id": "287",
+        "type": "application"
     },
     {
-        "id": "288"
+        "label": "10.133.1.101/hal/rtsapiwellsite:1, hal/rtsapiwellsite:1",
+        "id": "288",
+        "type": "application"
     },
     {
-        "id": "251"
+        "label": "Windows",
+        "id": "251",
+        "type": "capability"
     },
     {
-        "id": "252"
+        "label": "DS InSite",
+        "id": "252",
+        "type": "capability"
     },
     {
-        "id": "283"
+        "label": "ironpy",
+        "id": "283",
+        "type": "capability"
     },
     {
-        "id": "284"
+        "label": ".NET",
+        "id": "284",
+        "type": "capability"
     },
     {
-        "id": "253"
+        "label": "RTS Field",
+        "id": "253",
+        "type": "tag"
     },
     {
-        "id": "254"
+        "label": "Legacy",
+        "id": "254",
+        "type": "tag"
     }
-  ]
-}
+]
+};
 
 // graph = JSON.parse(JSON.stringify(graph).split('"type":').join('"group":'))
 
@@ -252,9 +303,9 @@ const data =
 // The graph configuration
 const myConfig =
 {
-  "automaticRearrangeAfterDropNode": false,
+  nodeHighlightBehavior: true,
+  "automaticRearrangeAfterDropNode": true,
   "height": 900,
-  "highlightBehavior": true,
   "highlightDegree": 1,
   "highlightOpacity": 0.1,
   "maxZoom": 8,
@@ -264,17 +315,17 @@ const myConfig =
   "width": 1500,
   "node": {
     "color": "lightgreen",
-    "fontSize": 8,
+    "fontSize": 14,
     "fontWeight": "normal",
-    // "labelProperty": "label",
+    "labelProperty": "label",
     "mouseCursor": "auto",
     "opacity": 1,
     "renderLabel": true,
-    "size": 1450,
+    "size": 4000,
     "strokeColor": "none",
     "strokeWidth": 1.5,
     "symbolType": "circle",
-    "highlightColor": "SAME",
+    "highlightColor": "red",
     "highlightFontSize": 12,
     "highlightFontWeight": "normal",
     "highlightStrokeColor": "blue",
@@ -289,12 +340,45 @@ const myConfig =
   }
 };
 
+// Graph event callbacks
+// const onClickNode = function(nodeId) {
+//      window.alert('Clicked node', nodeId);
+// };
+// //
+// const onMouseOverNode = function(nodeId) {
+//      window.alert('Mouse over node', nodeId);
+// };
+//
+// const onMouseOutNode = function(nodeId) {
+//      window.alert('Mouse out node', nodeId);
+// };
+//
+// const onClickLink = function(source, target) {
+//      window.alert(`Clicked link between ${source} and ${target}`);
+// };
 
 class Force extends Component {
-
+  // constructor (props) {
+  //   super(props);
+  //   this.state = {
+  //     nodes: [],
+  //     links: [],
+  //   }
+  // }
+  //
+  // componentDidMount () {
+  //   this.setState({
+  //     nodes: graph.nodes,
+  //     links: graph.links,
+  //   })
+  //
+  // }
 
   render() {
-
+    // let data = {
+    //   nodes: this.state.nodes,
+    //   links: this.state.links
+    // }
 
     return (
       <div>
