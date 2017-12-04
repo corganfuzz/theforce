@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Graph } from "react-d3-graph";
 
-const data = {
+let data = {
   "links":
   [
       {
@@ -297,22 +297,20 @@ nodes:
 
 // graph = JSON.parse(JSON.stringify(graph).split('"type":').join('"group":'))
 
-// graph = graph.replace("\"type\":", "\"group\":");
-// graph = graph.replace("\"type\":", "\"group\":");
-
 // The graph configuration
 const myConfig =
 {
   nodeHighlightBehavior: true,
   "automaticRearrangeAfterDropNode": true,
-  "height": 900,
   "highlightDegree": 1,
   "highlightOpacity": 0.1,
   "maxZoom": 8,
   "minZoom": 0.5,
   "panAndZoom": false,
   "staticGraph": false,
-  "width": 1500,
+  "width": 1000,
+  "height": 1000,
+
   "node": {
     "color": "lightgreen",
     "fontSize": 14,
@@ -321,11 +319,11 @@ const myConfig =
     "mouseCursor": "auto",
     "opacity": 1,
     "renderLabel": true,
-    "size": 4000,
-    "strokeColor": "none",
+    "size": 2000,
+    "strokeColor": "black",
     "strokeWidth": 1.5,
     "symbolType": "circle",
-    "highlightColor": "red",
+    "highlightColor": "SAME",
     "highlightFontSize": 12,
     "highlightFontWeight": "normal",
     "highlightStrokeColor": "blue",
@@ -340,55 +338,52 @@ const myConfig =
   }
 };
 
-// Graph event callbacks
-// const onClickNode = function(nodeId) {
-//      window.alert('Clicked node', nodeId);
-// };
-// //
-// const onMouseOverNode = function(nodeId) {
-//      window.alert('Mouse over node', nodeId);
-// };
-//
-// const onMouseOutNode = function(nodeId) {
-//      window.alert('Mouse out node', nodeId);
-// };
-//
-// const onClickLink = function(source, target) {
-//      window.alert(`Clicked link between ${source} and ${target}`);
-// };
+const styles =
+{
+  percent:{
+    width: '100%',
+    height:'100%',
+ }
+}
+
+const fallbackColor = '#fefefe';
+
+const groups = {
+  device: {
+    color: "#CC0000"
+  },
+  capability: {
+    color: "#363636"
+  },
+  tag: {
+    color: "lightgreen"
+  },
+  application: {
+    color: "blue"
+  },
+  device_instance:{
+    color: "orange"
+  }
+};
+
+ data = JSON.parse(JSON.stringify(data).split('"type":').join('"group":'))
+
 
 class Force extends Component {
-  // constructor (props) {
-  //   super(props);
-  //   this.state = {
-  //     nodes: [],
-  //     links: [],
-  //   }
-  // }
-  //
-  // componentDidMount () {
-  //   this.setState({
-  //     nodes: graph.nodes,
-  //     links: graph.links,
-  //   })
-  //
-  // }
 
   render() {
-    // let data = {
-    //   nodes: this.state.nodes,
-    //   links: this.state.links
-    // }
+
+    // graph = JSON.parse(JSON.stringify(graph).split('"type":').join('"group":'))
+    // data.nodes = data.nodes.map(
+    //   n => n['color'] = groups[n.type].color || fallbackColor
+    // );
 
     return (
-      <div>
+      <div style={styles.percent}>
       <Graph
-        id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+        id="graph-id"
         data={data}
         config={myConfig}
-        // onClickLink={onClickLink}
-        // onMouseOverNode={onMouseOverNode}
-        // onMouseOutNode={onMouseOutNode}
       />
       </div>
     );
