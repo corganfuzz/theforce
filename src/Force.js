@@ -369,6 +369,7 @@ const groups = {
  data = JSON.parse(JSON.stringify(data).split('"type":').join('"group":'))
 
 
+
 class Force extends Component {
 
   render() {
